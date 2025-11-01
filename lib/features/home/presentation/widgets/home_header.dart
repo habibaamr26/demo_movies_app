@@ -28,7 +28,7 @@ class HomeHeader extends StatelessWidget {
                       : const Icon(Icons.light_mode),
                   onPressed: () {
                     // toggle between light and dark themes
-                    context.read<ThemeCubit>().themeSwitch();
+                    context.read<ThemeCubit>().toggleTheme();
                   },
                 ),
               );

@@ -1,9 +1,10 @@
 
 
-abstract class ThemeState {}
+enum AppTheme { light, dark }
 
-class ThemeInitial extends ThemeState {}
+class ThemeState {
+  final AppTheme theme;
 
-class ThemeDark extends ThemeState {}
-
-class ThemeLight extends ThemeState {}  
+  ThemeState(this.theme);
+  bool get isDark => theme == AppTheme.dark;
+}

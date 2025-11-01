@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: lightTheme(),
             darkTheme: darkTheme(),
-            themeMode: state is ThemeDark ? ThemeMode.dark : ThemeMode.light,
+            themeMode: state.isDark ? ThemeMode.dark : ThemeMode.light,
             onGenerateRoute: AppRoute.generateRoute,
           );
         },
