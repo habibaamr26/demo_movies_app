@@ -6,7 +6,6 @@ import 'package:week6_task/config/theme/theme_cubit/theme_states.dart';
 class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit() : super(ThemeInitial());
   bool isDark = false;
-
   void themeSwitch() {
     if (isDark) {
     emit(ThemeDark());

@@ -32,7 +32,7 @@ class HomeBigImageStack extends StatelessWidget {
                         color: Colors.white,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(Icons.pause),
+                      child: Icon(Icons.pause, color: Colors.black),
                     ),
                   ),
 

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:week6_task/core/constant/images.dart';
 import 'package:week6_task/core/constant/text_style.dart';
 import 'package:week6_task/features/home/data/models/home_data_response_model.dart';
+import 'package:week6_task/features/home/presentation/movie_details_screen.dart';
 
 class ListItemBuilder extends StatelessWidget {
   HomeDataResultModel item;
-   ListItemBuilder({super.key, required this.item});
+  ListItemBuilder({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
-
     return Card(
       elevation: 2,
       color: Theme.of(context).cardColor,
@@ -17,13 +17,18 @@ class ListItemBuilder extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                Images.networkImage,
-                width: 90,
-                height: 140,
-                fit: BoxFit.cover,
+            Hero(
+              tag: item.id!,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  item.backdropPath != null
+                      ? 'https://image.tmdb.org/t/p/w500${item.backdropPath}'
+                      : Images.jerry,
+                  width: 90,
+                  height: 140,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(width: 10.0),
@@ -31,12 +36,9 @@ class ListItemBuilder extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    item.title!,
-                    style: TextStyles.textStyleBold15(context),
-                  ),
+                  Text(item.title!, style: TextStyles.textStyleBold15(context)),
                   const SizedBox(height: 5.0),
-                  Text("⭐  8/8"),
+                  Text("⭐ ${item.voteAverage.round()} /10"),
                   const SizedBox(height: 10.0),
                   Container(
                     padding: EdgeInsets.all(10),
@@ -53,7 +55,17 @@ class ListItemBuilder extends StatelessWidget {
               ),
             ),
 
-            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward_ios)),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => MovieDetailsScreen(item: item),
+                  ),
+                );
+              },
+              icon: Icon(Icons.arrow_forward_ios),
+            ),
           ],
         ),
       ),

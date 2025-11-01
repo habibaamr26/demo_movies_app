@@ -24,5 +24,10 @@ static TextStyle textStyleSemiBold20(BuildContext context) => TextStyle(
     fontWeight: FontWeight.normal,
     color: Theme.of(context).colorScheme.surface,
   );
+ static TextStyle textStyleRegular15Black(BuildContext context) => TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.normal,
+    color: Theme.of(context).colorScheme.onSurface,
+  );
 
 }
