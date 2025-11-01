@@ -8,7 +8,11 @@ class HomeInitial extends HomeState {}
 
 class HomeDataLoadingState extends HomeState {}
   
-class HomeDataMaxPageState extends HomeState {}
+class HomeDataMaxPageState extends HomeState {
+  final List<HomeDataResultModel> homeDataList;
+  
+  HomeDataMaxPageState({required this.homeDataList});
+}
 
 class HomeDataSuccessState extends HomeState {
   final List<HomeDataResultModel> homeDataList;

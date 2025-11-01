@@ -12,23 +12,34 @@ class HomeCubit extends Cubit<HomeState> {
  
   List<HomeDataResultModel> homeDataList = [];
  int page = 1;
-  getHomeData() async {
+  bool isLoadingMore = false;
+  bool hasReachedMax = false;
+
+  Future<void> getHomeData() async {
+    if (isLoadingMore || hasReachedMax) return;
     if (page == 1) {
       emit(HomeDataLoadingState());
-    }
-    if (page == 500) {
-      emit(HomeDataMaxPageState());
-      return;
+    } else {
+      isLoadingMore = true;
     }
     final result = await homeRepository.getHomeData(page: page);
     result.when(
       onSuccess: (data) {
+
+        isLoadingMore = false;
+         if (data.results == null || data.results!.isEmpty) {
+          hasReachedMax = true;
+          emit(HomeDataMaxPageState(homeDataList: homeDataList));
+          return;
+        }
+
         homeDataList.addAll(data.results!);
+        page++;
         emit(HomeDataSuccessState(homeDataList: homeDataList));
       },
       onError: (error) {
+         isLoadingMore = false;
         emit(HomeDataErrorState(errorMessage: error.message ?? "Something went wrong"));
-
       },
     );
   }
