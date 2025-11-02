@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:week6_task/config/cashing/shared_preferences.dart';
 import 'package:week6_task/config/theme/dark_theme.dart';
 import 'package:week6_task/config/theme/light_theme.dart';
 import 'package:week6_task/config/theme/theme_cubit/theme_cubit.dart';
 import 'package:week6_task/config/theme/theme_cubit/theme_states.dart';
+import 'package:week6_task/core/dependancy_injection/dependancyinjection.dart';
 import 'package:week6_task/core/route/app_route.dart';
 
 class MyApp extends StatelessWidget {
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ThemeCubit(),
+      create: (_) => ThemeCubit(getIt<SharedPreferencesCashing>()),
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
