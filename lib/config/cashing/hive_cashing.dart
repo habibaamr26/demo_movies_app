@@ -20,7 +20,6 @@ class HiveCache {
   T? getData<T>(String key) {
     return _box!.get(key) as T?;
   }
-
  
   Future<void> deleteData(String key) async {
     await _box!.delete(key);
